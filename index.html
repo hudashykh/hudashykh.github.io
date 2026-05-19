@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Huda Shaikh | IT Support</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue: #2563eb; --blue-light: #eff6ff; --blue-mid: #dbeafe;
+    --blue-dark: #1d4ed8; --text: #1e293b; --muted: #64748b;
+    --border: #e2e8f0; --bg: #ffffff; --bg2: #f8fafc;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; }
+
+  nav { position: sticky; top: 0; background: #fff; border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; height: 60px; z-index: 100; }
+  .nav-name { font-weight: 600; font-size: 0.95rem; color: var(--blue); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--blue); }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+  section { padding: 5rem 0; }
+  section + section { border-top: 1px solid var(--border); }
+
+  #hero { background: linear-gradient(135deg, #eff6ff 0%, #ffffff 60%); padding: 6rem 0 5rem; border-bottom: 1px solid var(--border); }
+  .hero-inner { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+  .hero-badge { display: inline-block; background: var(--blue-mid); color: var(--blue); font-size: 0.78rem; font-weight: 600; padding: 0.3rem 0.9rem; border-radius: 100px; margin-bottom: 1.5rem; letter-spacing: 0.03em; }
+  h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; color: var(--text); line-height: 1.2; margin-bottom: 0.5rem; }
+  .hero-title { font-size: 1.1rem; color: var(--blue); font-weight: 500; margin-bottom: 1.25rem; }
+  .hero-desc { font-size: 1rem; color: var(--muted); max-width: 560px; line-height: 1.8; margin-bottom: 2rem; }
+  .hero-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.6rem 1.3rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; }
+  .btn-primary { background: var(--blue); color: #fff; }
+  .btn-primary:hover { background: var(--blue-dark); }
+  .btn-outline { background: #fff; color: var(--blue); border: 1.5px solid var(--blue); }
+  .btn-outline:hover { background: var(--blue-light); }
+
+  .sec-heading { font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+  .sec-sub { font-size: 0.9rem; color: var(--muted); margin-bottom: 2.25rem; }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+  .about-text p { color: var(--muted); font-size: 0.93rem; line-height: 1.85; margin-bottom: 1rem; }
+  .about-facts { background: var(--blue-light); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+  .fact-row { display: flex; align-items: center; gap: 0.75rem; }
+  .fact-icon { width: 34px; height: 34px; background: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; border: 1px solid var(--border); }
+  .fact-label { color: var(--muted); font-size: 0.78rem; }
+  .fact-val { color: var(--text); font-weight: 500; font-size: 0.88rem; }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+  .skill-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.25rem; transition: border-color 0.2s; }
+  .skill-card:hover { border-color: var(--blue); }
+  .skill-card-title { font-size: 0.78rem; font-weight: 600; color: var(--blue); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.65rem; }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .pill { font-size: 0.75rem; padding: 0.2rem 0.55rem; background: #fff; border: 1px solid var(--border); border-radius: 100px; color: var(--text); }
+
+  .filter-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.75rem; }
+  .ftag { padding: 0.28rem 0.85rem; border-radius: 100px; border: 1.5px solid var(--border); background: #fff; font-size: 0.78rem; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.18s; }
+  .ftag:hover, .ftag.on { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+
+  .cases-list { display: flex; flex-direction: column; gap: 1rem; }
+  .case-card { background: #fff; border: 1.5px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.2s; }
+  .case-card:hover { border-color: #93c5fd; }
+  .case-card.open { border-color: var(--blue); }
+  .case-top { display: flex; align-items: center; gap: 1rem; padding: 1.1rem 1.4rem; cursor: pointer; user-select: none; }
+  .case-emoji { font-size: 22px; width: 44px; height: 44px; background: var(--blue-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .case-info { flex: 1; }
+  .case-cat-label { font-size: 0.72rem; font-weight: 600; color: var(--blue); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.15rem; }
+  .case-name { font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.4; }
+  .case-tags { display: flex; gap: 0.4rem; align-items: center; margin-left: auto; flex-shrink: 0; }
+  .tag { font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 100px; font-weight: 500; }
+  .tag-med  { background: #fef9c3; color: #854d0e; }
+  .tag-high { background: #fee2e2; color: #991b1b; }
+  .tag-low  { background: #dcfce7; color: #166534; }
+  .tag-time { background: var(--bg2); color: var(--muted); border: 1px solid var(--border); }
+  .case-arrow { color: var(--muted); font-size: 0.75rem; margin-left: 0.5rem; transition: transform 0.25s; }
+  .case-card.open .case-arrow { transform: rotate(180deg); }
+  .case-body { display: none; border-top: 1px solid var(--border); padding: 1.25rem 1.4rem; background: var(--bg2); }
+  .case-card.open .case-body { display: block; }
+
+  .summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+  .sum-block { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1rem; }
+  .sum-block-label { font-size: 0.68rem; font-weight: 600; color: var(--blue); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+  .sum-block-val { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+
+  .steps-heading { font-size: 0.78rem; font-weight: 600; color: var(--text); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.85rem; }
+  .steps-list { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.1rem; }
+  .step { display: flex; gap: 0.85rem; align-items: flex-start; }
+  .step-num { background: var(--blue); color: #fff; font-size: 0.68rem; font-weight: 600; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .step-text { font-size: 0.84rem; color: var(--muted); line-height: 1.65; }
+  .step-text strong { color: var(--text); font-weight: 500; }
+  .result-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 0.85rem 1rem; }
+  .result-label { font-size: 0.68rem; font-weight: 600; color: #16a34a; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.25rem; }
+  .result-text { font-size: 0.83rem; color: var(--muted); line-height: 1.55; }
+
+  .exp-list { display: flex; flex-direction: column; gap: 1.25rem; }
+  .exp-card { background: #fff; border: 1.5px solid var(--border); border-radius: 12px; padding: 1.4rem 1.5rem; border-left: 4px solid var(--blue); }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.2rem; flex-wrap: wrap; gap: 0.5rem; }
+  .exp-role { font-size: 1rem; font-weight: 600; color: var(--text); }
+  .exp-date { font-size: 0.78rem; background: var(--blue-mid); color: var(--blue); padding: 0.2rem 0.65rem; border-radius: 100px; font-weight: 500; }
+  .exp-company { font-size: 0.85rem; color: var(--blue); margin-bottom: 0.9rem; font-weight: 500; }
+  .exp-bul { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+  .exp-bul li { font-size: 0.85rem; color: var(--muted); padding-left: 1.1rem; position: relative; line-height: 1.65; }
+  .exp-bul li::before { content: '•'; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
+
+  .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .proj-card { background: #fff; border: 1.5px solid var(--border); border-radius: 12px; padding: 1.3rem 1.4rem; transition: border-color 0.2s, transform 0.2s; }
+  .proj-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+  .proj-title { font-size: 0.93rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text); }
+  .proj-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; margin-bottom: 0.85rem; }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .proj-tag { font-size: 0.72rem; padding: 0.18rem 0.5rem; background: var(--blue-light); color: var(--blue); border-radius: 4px; font-weight: 500; }
+
+  #contact { background: var(--blue-light); border-top: 1px solid var(--blue-mid); }
+  .contact-inner { text-align: center; }
+  .contact-inner p { color: var(--muted); font-size: 0.9rem; max-width: 440px; margin: 0 auto 2rem; line-height: 1.75; }
+  .contact-cards { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .contact-card { background: #fff; border: 1.5px solid var(--border); border-radius: 10px; padding: 0.85rem 1.4rem; display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--text); font-size: 0.85rem; font-weight: 500; transition: all 0.2s; }
+  .contact-card:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-1px); }
+  .contact-card svg { color: var(--blue); flex-shrink: 0; }
+
+  footer { text-align: center; padding: 1.75rem 2rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); background: #fff; }
+
+  @media(max-width: 640px) {
+    nav { padding: 0 1rem; } .nav-links { gap: 1.2rem; } .nav-links a { font-size: 0.78rem; }
+    .container { padding: 0 1.1rem; } .hero-inner { padding: 0 1.1rem; }
+    .about-grid { grid-template-columns: 1fr; } .summary-grid { grid-template-columns: 1fr; }
+    .proj-grid { grid-template-columns: 1fr; } .case-tags { display: none; }
+    section { padding: 3.5rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Huda Shaikh</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#cases">Case Studies</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-inner">
+    <span class="hero-badge">Open to work in Sydney, AU</span>
+    <h1>Huda Shaikh</h1>
+    <div class="hero-title">Level 1 IT Support Specialist</div>
+    <p class="hero-desc">I help people get their tech working again. With 2 years of hands-on helpdesk experience, I enjoy solving everyday IT problems quickly and clearly so that people can get back to what they do best.</p>
+    <div class="hero-links">
+      <a href="#cases" class="btn btn-primary">See My Case Studies</a>
+      <a href="mailto:hudashykh1997@gmail.com" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <h2 class="sec-heading">About Me</h2>
+    <p class="sec-sub">A quick look at who I am and what I bring to the table</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I got into IT because I genuinely enjoy solving problems and helping people. Seeing someone go from frustrated to relieved after a ticket is closed is what keeps me motivated. Over the past two years I have handled everything from network drops and Outlook issues to account lockouts and stubborn printer drivers.</p>
+        <p>I have a Bachelor of Computer Science and I keep my skills sharp through home labs. I explain things in plain English, I document everything I touch, and I work well under pressure. Based in Sydney and ready to contribute to a great team from day one.</p>
+      </div>
+      <div class="about-facts">
+        <div class="fact-row">
+          <div class="fact-icon">📍</div>
+          <div><div class="fact-label">Location</div><div class="fact-val">Sydney, Australia</div></div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-icon">💼</div>
+          <div><div class="fact-label">Experience</div><div class="fact-val">2 Years in IT Support</div></div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-icon">🎓</div>
+          <div><div class="fact-label">Education</div><div class="fact-val">Bachelor of Computer Science</div></div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-icon">🖥️</div>
+          <div><div class="fact-label">Speciality</div><div class="fact-val">Microsoft 365 and Active Directory</div></div>
+        </div>
+        <div class="fact-row">
+          <div class="fact-icon">✅</div>
+          <div><div class="fact-label">Status</div><div class="fact-val">Available immediately</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 3rem;">
+      <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1.25rem; color: var(--text);">Technical skills</h3>
+      <div class="skills-grid">
+        <div class="skill-card"><div class="skill-card-title">Operating Systems</div><div class="skill-pills"><span class="pill">Windows 10/11</span><span class="pill">Windows Server 2016</span><span class="pill">Linux basics</span></div></div>
+        <div class="skill-card"><div class="skill-card-title">Identity and Directory</div><div class="skill-pills"><span class="pill">Active Directory</span><span class="pill">Entra ID</span><span class="pill">Group Policy</span><span class="pill">DNS</span><span class="pill">DHCP</span></div></div>
+        <div class="skill-card"><div class="skill-card-title">Microsoft 365</div><div class="skill-pills"><span class="pill">Admin Center</span><span class="pill">Exchange Online</span><span class="pill">Teams</span><span class="pill">SharePoint</span></div></div>
+        <div class="skill-card"><div class="skill-card-title">Networking</div><div class="skill-pills"><span class="pill">TCP/IP</span><span class="pill">Static IP</span><span class="pill">Subnetting</span><span class="pill">VPN</span></div></div>
+        <div class="skill-card"><div class="skill-card-title">Tools and Helpdesk</div><div class="skill-pills"><span class="pill">Ticketing Systems</span><span class="pill">Remote Desktop</span><span class="pill">PowerShell basics</span><span class="pill">CMD</span></div></div>
+        <div class="skill-card"><div class="skill-card-title">Virtualisation</div><div class="skill-pills"><span class="pill">Oracle VirtualBox</span><span class="pill">Microsoft Hyper-V</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="cases" style="background: var(--bg2);">
+  <div class="container">
+    <h2 class="sec-heading">Real IT Problems I Have Solved</h2>
+    <p class="sec-sub">These are real issues I dealt with in my support roles. Click any card to see how I fixed it.</p>
+
+    <div class="filter-row">
+      <button class="ftag on" onclick="filter('all', this)">All</button>
+      <button class="ftag" onclick="filter('network', this)">Network</button>
+      <button class="ftag" onclick="filter('email', this)">Email</button>
+      <button class="ftag" onclick="filter('account', this)">Accounts</button>
+      <button class="ftag" onclick="filter('hardware', this)">Hardware</button>
+      <button class="ftag" onclick="filter('performance', this)">Performance</button>
+      <button class="ftag" onclick="filter('software', this)">Software</button>
+      <button class="ftag" onclick="filter('onboarding', this)">Onboarding</button>
+    </div>
+
+    <div class="cases-list" id="casesList">
+
+      <!-- 1. Internet -->
+      <div class="case-card" data-cat="network">
+        <div class="case-top" onclick="toggle(this.closest('.case-card'))">
+          <div class="case-emoji">🌐</div>
+          <div class="case-info">
+            <div class="case-cat-label">Network</div>
+            <div class="case-name">User had no internet but everyone else on the floor was fine</div>
+          </div>
+          <div class="case-tags"><span class="tag tag-med">Medium</span><span class="tag tag-time">15 min fix</span></div>
+          <span class="case-arrow">▼</span>
+        </div>
+        <div class="case-body">
+          <div class="summary-grid">
+            <div class="sum-block"><div class="sum-block-label">Problem</div><div class="sum-block-val">User could not browse anything. Colleagues nearby had no issues.</div></div>
+            <div class="sum-block"><div class="sum-block-label">Root Cause</div><div class="sum-block-val">Someone had manually set a static IP that clashed with another device on the same network.</div></div>
+            <div class="sum-block"><div class="sum-block-label">Fix</div><div class="sum-block-val">Switched back to automatic DHCP, flushed DNS and renewed the lease. Internet came back straight away.</div></div>
+          </div>
+          <div class="steps-heading">What I did</div>
+          <ul class="steps-list">
+            <li class="step"><span class="step-num">1</span><span class="step-text">Checked if the problem was just this one person. It was only them, so I knew it was a device issue not a network outage.</span></li>
+            <li class="step"><span class="step-num">2</span><span class="step-text">Ran <strong>ping 192.168.1.1</strong> to test the gateway. It responded, so the hardware was fine but the IP config was wrong.</span></li>
+            <li class="step"><span class="step-num">3</span><span class="step-text">Ran <strong>ipconfig /all</strong> and spotted a manually assigned static IP conflicting with another device on the subnet.</span></li>
+            <li class="step"><span class="step-num">4</span><span class="step-text">Went into Network Adapter settings, switched IPv4 to <strong>Obtain IP automatically</strong>, then ran ipconfig /release, /renew and /flushdns.</span></li>
+            <li class="step"><span class="step-num">5</span><span class="step-text">Confirmed with <strong>ping 8.8.8.8</strong> and opened a browser with the user to make sure everything was back to normal.</span></li>
+          </ul>
+          <div class="result-box"><div class="result-label">Result</div><div class="result-text">Back online in 15 minutes. Logged it and added a note that static IPs should only be set with IT approval.</div></div>
+        </div>
+      </div>
+
+      <!-- 2. Outlook -->
+      <div class="case-card" data-cat="email">
+        <div class="case-top" onclick="toggle(this.closest('.case-card'))">
+          <div class="case-emoji">📧</div>
+          <div class="case-info">
+            <div class="case-cat-label">Email</div>
+            <div class="case-name">Outlook stopped syncing and emails were not coming through</div>
+          </div>
+          <div class="case-tags"><span class="tag tag-high">High</span><span class="tag tag-time">30 min fix</span></div>
+          <span class="case-arrow">▼</span>
+        </div>
+        <div class="case-body">
+          <div class="summary-grid">
+            <div class="sum-block"><div class="sum-block-label">Problem</div><div class="sum-block-val">Outlook looked up to date but new emails were not arriving and sending was silently failing.</div></div>
+            <div class="sum-block"><div class="sum-block-label">Root Cause</div><div class="sum-block-val">Corrupted Outlook profile and an oversized OST cache file (18 GB) breaking sync with Exchange Online.</div></div>
+            <div class="sum-block"><div class="sum-block-label">Fix</div><div class="sum-block-val">Built a new Outlook profile and deleted the old OST file. Full sync came back right away.</div></div>
+          </div>
+          <div class="steps-heading">What I did</div>
+          <ul class="steps-list">
+            <li class="step"><span class="step-num">1</span><span class="step-text">Tested <strong>Outlook Web App</strong> in the browser. Emails were arriving there fine, so the issue was the local Outlook client not the server.</span></li>
+            <li class="step"><span class="step-num">2</span><span class="step-text">Launched Outlook in <strong>safe mode</strong> to rule out add-ins. Issue still showed up, pointing to the profile or cache.</span></li>
+            <li class="step"><span class="step-num">3</span><span class="step-text">Went to Control Panel, opened <strong>Mail settings</strong> and created a new Outlook profile. Emails loaded immediately, confirming the old profile was corrupt.</span></li>
+            <li class="step"><span class="step-num">4</span><span class="step-text">Found the old <strong>.OST file</strong> in AppData and deleted it. It was 18 GB, well over the healthy limit. Outlook created a fresh one automatically.</span></li>
+            <li class="step"><span class="step-num">5</span><span class="step-text">Set the new profile as default, restarted Outlook and confirmed all folders, calendar and contacts were syncing correctly.</span></li>
+          </ul>
+          <div class="result-box"><div class="result-label">Result</div><div class="result-text">Email fully working in 30 minutes. Added OST file size checks to the team preventative maintenance list.</div></div>
+        </div>
+      </div>
+
+      <!-- 3. Account Lockout -->
+      <div class="case-card" data-cat="account">
+        <div class="case-top" onclick="toggle(this.closest('.case-card'))">
+          <div class="case-emoji">🔐</div>
+          <div class="case-info">
+            <div class="case-cat-label">Account Management</div>
+            <div class="case-name">User cannot login even though they are entering the correct credentials</div>
+          </div>
+          <div class="case-tags"><span class="tag tag-high">High</span><span class="tag tag-time">5 min fix</span></div>
+          <span class="case-arrow">▼</span>
+        </div>
+        <div class="case-body">
+          <div class="summary-grid">
+            <div class="sum-block"><div class="sum-block-label">Problem</div><div class="sum-block-val">User could not log in despite entering the correct credentials.</div></div>
+            <div class="sum-block"><div class="sum-block-label">Root Cause</div><div class="sum-block-val">Account was locked in Active Directory due to too many failed login attempts.</div></div>
+            <div class="sum-block"><div class="sum-block-label">Fix</div><div class="sum-block-val">Unlocked the account in AD, reset the password and made sure the user changes it on first login.</div></div>
+          </div>
+          <div class="steps-heading">What I did</div>
+          <ul class="steps-list">
+            <li class="step"><span class="step-num">1</span><span class="step-text">User confirmed they were entering the right password but still could not get in.</span></li>
+            <li class="step"><span class="step-num">2</span><span class="step-text">Opened <strong>Active Directory Users and Computers</strong> and searched for the user account. Confirmed it was locked due to too many failed login attempts.</span></li>
+            <li class="step"><span class="step-num">3</span><span class="step-text">Right-clicked the user account and selected <strong>Reset Password</strong>. Set a new temporary password and ticked <strong>User must change password at next login</strong>.</span></li>
+            <li class="step"><span class="step-num">4</span><span class="step-text">Unlocked the account and confirmed with the user that they could log in successfully with the new password.</span></li>
+          </ul>
+          <div class="result-box"><div class="result-label">Result</div><div class="result-text">User was back in within 5 minutes and set their own new password on first login.</div></div>
+        </div>
+      </div>
+
+      <!-- 4. Printer -->
+      <div class="case-card" data-cat="hardware">
+        <div class="case-top" onclick="toggle(this.closest('.case-card'))">
+          <div class="case-emoji">🖨️</div>
+          <div class="case-info">
+            <div class="case-cat-label">Hardware</div>
+            <div class="case-name">Shared office printer went offline and jobs were stacking up</div>
+          </div>
+          <div class="case-tags"><span class="tag tag-med">Medium</span><span class="tag tag-time">20 min fix</span></div>
+          <span class="case-arrow">▼</span>
+        </div>
+        <div class="case-body">
+          <div class="summary-grid">
+            <div class="sum-block"><div class="sum-block-label">Problem</div><div class="sum-block-val">The shared printer showed offline for the whole floor. Jobs kept queuing but nothing was printing.</div></div>
+            <div class="sum-block"><div class="sum-block-label">Root Cause</div><div class="sum-block-val">The Print Spooler service had crashed due to a stuck job. Two machines also had outdated drivers.</div></div>
+            <div class="sum-block"><div class="sum-block-label">Fix</div><div class="sum-block-val">Cleared the stuck jobs, restarted the Spooler service and pushed updated drivers to affected machines.</div></div>
+          </div>
+          <div class="steps-heading">What I did</div>
+          <ul class="steps-list">
+            <li class="step"><span class="step-num">1</span><span class="step-text">Pinged the printer's IP address. It responded fine, so the hardware was on and connected. The issue was software side.</span></li>
+            <li class="step"><span class="step-num">2</span><span class="step-text">Opened <strong>Services.msc</strong> and found the <strong>Print Spooler</strong> was stopped. Tried restarting it but it crashed again because of a stuck job.</span></li>
+            <li class="step"><span class="step-num">3</span><span class="step-text">Stopped Spooler, went into <strong>C:\Windows\System32\spool\PRINTERS</strong> and deleted all files inside. Then restarted Spooler successfully.</span></li>
+            <li class="step"><span class="step-num">4</span><span class="step-text">Set the printer back to online and sent a test print. It went through straight away.</span></li>
+            <li class="step"><span class="step-num">5</span><span class="step-text">Pushed updated printer drivers from the print server to two machines that had outdated versions.</span></li>
+          </ul>
+          <div class="result-box"><div class="result-label">Result</div><div class="result-text">Everyone was printing again within 20 minutes. Wrote up the Spooler restart steps so any team member could handle it next time.</div></div>
+        </div>
+      </div>
+
+      <!-- 5. Slow PC -->
+      <div class="case-card" data-cat="performance">
+        <div class="case-top" onclick="toggle(this.closest('.case-card'))">
+          <div class="case-emoji">🐌</div>
+          <div class="case-info">
+            <div class="case-cat-label">Performance</div>
+            <div class="case-name">PC was taking over 10 minutes to boot and freezing throughout the day</div>
+          </div>
+          <div class="case-tags"><span class="tag tag-med">Medium</span><span class="tag tag-time">45 min fix</span></div>
+          <span class="case-arrow">▼</span>
+        </div>
+        <div class="case-body">
+          <div class="summary-grid">
+            <div class="sum-block"><div class="sum-block-label">Problem</div><div class="sum-block-val">User said their PC was painfully slow all day and took more than 10 minutes just to get to the desktop.</div></div>
+            <div class="sum-block"><div class="sum-block-label">Root Cause</div><div class="sum-block-val">23 startup programs running, hard drive 97% full with only 4 GB free, and Windows Update running silently during work hours.</div></div>
+            <div class="sum-block"><div class="sum-block-label">Fix</div><div class="sum-block-val">Disabled startup programs, freed 15 GB of temp files and set Windows Update to run outside business hours.</div></div>
+          </div>
+          <div class="steps-heading">What I did</div>
+          <ul class="steps-list">
+            <li class="step"><span class="step-num">1</span><span class="step-text">Opened <strong>Task Manager, Startup tab</strong>. Found 23 programs launching at startup. Disabled everything non-essential.</span></li>
+            <li class="step"><span class="step-num">2</span><span class="step-text">Checked the <strong>Performance tab</strong> during reboot. Disk was at 100%. Traced it to <strong>Windows Update</strong> downloading in the background during work hours.</span></li>
+            <li class="step"><span class="step-num">3</span><span class="step-text">Ran <strong>Disk Cleanup</strong> and cleared temp files, Windows Update cache and the Recycle Bin. Freed around 15 GB.</span></li>
+            <li class="step"><span class="step-num">4</span><span class="step-text">Set <strong>Windows Update Active Hours</strong> to 8am to 6pm so updates only download outside of work time.</span></li>
+            <li class="step"><span class="step-num">5</span><span class="step-text">Rebooted and timed it. Machine reached the desktop in 88 seconds. CPU and disk both under 30% at idle.</span></li>
+          </ul>
+          <div class="result-box"><div class="result-label">Result</div><div class="result-text">Boot time went from over 10 minutes down to 88 seconds. Flagged the machine for an SSD upgrade in the next hardware refresh.</div></div>
+        </div>
+      </div>
+
+      <!-- 6. Software -->
+      <div class="case-card" data-cat="software">
+        <div class="case-top" onclick="toggle(this.closest('.case-card'))">
+          <div class="case-emoji">💿</div>
+          <div class="case-info">
+            <div class="case-cat-label">Software</div>
+            <div class="case-name">Software install kept failing with Error 1603</div>
+          </div>
+          <div class="case-tags"><span class="tag tag-med">Medium</span><span class="tag tag-time">25 min fix</span></div>
+          <span class="case-arrow">▼</span>
+        </div>
+        <div class="case-body">
+          <div class="summary-grid">
+            <div class="sum-block"><div class="sum-block-label">Problem</div><div class="sum-block-val">User needed to install business software but kept getting Error 1603 every time.</div></div>
+            <div class="sum-block"><div class="sum-block-label">Root Cause</div><div class="sum-block-val">No local admin rights, plus a corrupt registry key left by a previous failed install attempt.</div></div>
+            <div class="sum-block"><div class="sum-block-label">Fix</div><div class="sum-block-val">Removed the stale registry entry and ran the installer as admin. Completed without issues.</div></div>
+          </div>
+          <div class="steps-heading">What I did</div>
+          <ul class="steps-list">
+            <li class="step"><span class="step-num">1</span><span class="step-text">Checked <strong>Event Viewer</strong> Application logs. Found Event ID 11708 pointing to an MSI permissions failure.</span></li>
+            <li class="step"><span class="step-num">2</span><span class="step-text">Confirmed the user was a standard account. Right-clicked the installer and chose <strong>Run as Administrator</strong>. Still failed.</span></li>
+            <li class="step"><span class="step-num">3</span><span class="step-text">Found a leftover <strong>registry key</strong> from a previous failed attempt. Exported a backup then deleted the stale entry.</span></li>
+            <li class="step"><span class="step-num">4</span><span class="step-text">Cleared the <strong>%temp% folder</strong> to remove any cached installer files that could interfere.</span></li>
+            <li class="step"><span class="step-num">5</span><span class="step-text">Ran the installer as Administrator again. Completed successfully. Confirmed it worked under the user's account.</span></li>
+          </ul>
+          <div class="result-box"><div class="result-label">Result</div><div class="result-text">Software installed and working within 25 minutes. Added a note to always clear temp files and check for leftover registry entries before reinstalling.</div></div>
+        </div>
+      </div>
+
+      <!-- 7. VPN -->
+      <div class="case-card" data-cat="network">
+        <div class="case-top" onclick="toggle(this.closest('.case-card'))">
+          <div class="case-emoji">🔒</div>
+          <div class="case-info">
+            <div class="case-cat-label">VPN</div>
+            <div class="case-name">Remote worker could not connect to VPN and was completely unable to work</div>
+          </div>
+          <div class="case-tags"><span class="tag tag-high">High</span><span class="tag tag-time">20 min fix</span></div>
+          <span class="case-arrow">▼</span>
+        </div>
+        <div class="case-body">
+          <div class="summary-grid">
+            <div class="sum-block"><div class="sum-block-label">Problem</div><div class="sum-block-val">Remote employee's VPN authentication kept failing even with the right password.</div></div>
+            <div class="sum-block"><div class="sum-block-label">Root Cause</div><div class="sum-block-val">MFA authenticator had time drift causing invalid codes. VPN client was also outdated and incompatible with the server.</div></div>
+            <div class="sum-block"><div class="sum-block-label">Fix</div><div class="sum-block-val">Re-synced the authenticator time and updated the VPN client. Connected first try after that.</div></div>
+          </div>
+          <div class="steps-heading">What I did</div>
+          <ul class="steps-list">
+            <li class="step"><span class="step-num">1</span><span class="step-text">Asked the user to log into the <strong>M365 web portal</strong>. That worked fine, so the account was not locked. The issue was VPN-specific.</span></li>
+            <li class="step"><span class="step-num">2</span><span class="step-text">Checked the <strong>Authenticator app</strong>. Codes were generating but the app's time was slightly out of sync. Walked them through enabling automatic time sync.</span></li>
+            <li class="step"><span class="step-num">3</span><span class="step-text">Tried VPN again. Still failed. Checked the client version and found the user had v4.6 but the server now required v5.x minimum.</span></li>
+            <li class="step"><span class="step-num">4</span><span class="step-text">Sent a download link for the latest VPN client and walked them through installing it over the phone.</span></li>
+            <li class="step"><span class="step-num">5</span><span class="step-text">User connected successfully. Confirmed access to internal file shares and the company intranet.</span></li>
+          </ul>
+          <div class="result-box"><div class="result-label">Result</div><div class="result-text">Remote worker back online in 20 minutes. Sent a notice to the rest of the remote team about the VPN update so no one else hit the same issue.</div></div>
+        </div>
+      </div>
+
+      <!-- 8. Onboarding -->
+      <div class="case-card" data-cat="onboarding">
+        <div class="case-top" onclick="toggle(this.closest('.case-card'))">
+          <div class="case-emoji">👤</div>
+          <div class="case-info">
+            <div class="case-cat-label">Onboarding</div>
+            <div class="case-name">Setting up a brand new employee for their first day from scratch</div>
+          </div>
+          <div class="case-tags"><span class="tag tag-low">Routine</span><span class="tag tag-time">2 hr setup</span></div>
+          <span class="case-arrow">▼</span>
+        </div>
+        <div class="case-body">
+          <div class="summary-grid">
+            <div class="sum-block"><div class="sum-block-label">Task</div><div class="sum-block-val">Get a new hire's full IT setup ready before they walked through the door on day one.</div></div>
+            <div class="sum-block"><div class="sum-block-label">Scope</div><div class="sum-block-val">AD account, M365 licence, email, laptop, software, peripherals, network drives and access permissions.</div></div>
+            <div class="sum-block"><div class="sum-block-label">Result</div><div class="sum-block-val">New employee fully set up and working by 9:30 AM. Zero follow-up tickets raised.</div></div>
+          </div>
+          <div class="steps-heading">What I did</div>
+          <ul class="steps-list">
+            <li class="step"><span class="step-num">1</span><span class="step-text">Created the <strong>Active Directory account</strong> in ADUC with the correct username, UPN and department OU so the right Group Policies applied automatically.</span></li>
+            <li class="step"><span class="step-num">2</span><span class="step-text">Set up the <strong>Microsoft 365 account</strong>, assigned the licence, configured Exchange Online email and added them to the relevant Teams channels and SharePoint sites.</span></li>
+            <li class="step"><span class="step-num">3</span><span class="step-text">Joined the <strong>laptop to the domain</strong>, ran all Windows updates and installed the standard software stack including Microsoft 365 Apps, VPN client and antivirus.</span></li>
+            <li class="step"><span class="step-num">4</span><span class="step-text">Set up peripherals, installed printer drivers, mapped shared <strong>network drives</strong> as persistent drive letters and configured a second monitor.</span></li>
+            <li class="step"><span class="step-num">5</span><span class="step-text">Walked the new employee through everything when they arrived and handed them a printed quick-start guide to keep at their desk.</span></li>
+          </ul>
+          <div class="result-box"><div class="result-label">Result</div><div class="result-text">New hire was confident and productive from their very first morning. Used this process to build a standardised onboarding checklist for the team.</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <h2 class="sec-heading">Work Experience</h2>
+    <p class="sec-sub">My background across IT support, content writing and web development</p>
+    <div class="exp-list">
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-role">Junior IT Support</div>
+          <span class="exp-date">Jan 2025 to Dec 2025</span>
+        </div>
+        <div class="exp-company">Expedey, Karachi</div>
+        <ul class="exp-bul">
+          <li>Provided first-level support resolving hardware, software and connectivity issues through the ticketing system.</li>
+          <li>Managed user accounts in Active Directory including password resets, unlocking accounts and setting up new users.</li>
+          <li>Supported new staff onboarding by setting up laptops, installing software and configuring email and access.</li>
+          <li>Logged all incidents and resolutions to keep accurate support records.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-role">IT Support</div>
+          <span class="exp-date">Dec 2023 to Nov 2024</span>
+        </div>
+        <div class="exp-company">Progatix, Karachi</div>
+        <ul class="exp-bul">
+          <li>Handled Level 1 helpdesk tickets covering desktop, network and peripheral issues for internal users.</li>
+          <li>Created and managed users in Microsoft Entra ID including dynamic groups and B2B guest access.</li>
+          <li>Administered Microsoft 365 covering user setup, licence assignment and org-wide settings.</li>
+          <li>Contributed to the internal knowledge base with step-by-step guides for common issues.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-role">Technical Content Writer</div>
+          <span class="exp-date">May 2022 to Oct 2023</span>
+        </div>
+        <div class="exp-company">G-Tech Solutions, Remote</div>
+        <ul class="exp-bul">
+          <li>Wrote technical documentation for IT infrastructure processes, network setups and troubleshooting procedures.</li>
+          <li>Turned complex technical topics into simple step-by-step guides that non-technical staff could follow.</li>
+          <li>Worked with IT teams to document system configurations and internal workflows accurately.</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-role">Web Developer</div>
+          <span class="exp-date">Sept 2020 to July 2021</span>
+        </div>
+        <div class="exp-company">Ghani Business Solutions, Hyderabad</div>
+        <ul class="exp-bul">
+          <li>Built web applications using PHP and the CodeIgniter MVC framework on XAMPP.</li>
+          <li>Created RESTful APIs and collaborated with backend engineers on features.</li>
+          <li>Responsible for installing and maintaining CodeIgniter, PHP and MySQL environments.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 2.5rem;">
+      <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1.1rem; color: var(--text);">Education</h3>
+      <div class="exp-card" style="border-left-color: #93c5fd;">
+        <div class="exp-header">
+          <div class="exp-role">Bachelor of Computer Science</div>
+          <span class="exp-date">2019</span>
+        </div>
+        <div class="exp-company">Isra University, Pakistan</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 2.5rem;">
+      <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 1.1rem; color: var(--text);">Home Lab Projects</h3>
+      <div class="proj-grid">
+        <div class="proj-card">
+          <div class="proj-title">Active Directory Lab with VirtualBox</div>
+          <div class="proj-desc">Set up a Windows Server 2016 environment from scratch including Active Directory, DNS and joining a Windows 10 client to the domain.</div>
+          <div class="proj-tags"><span class="proj-tag">VirtualBox</span><span class="proj-tag">Windows Server 2016</span><span class="proj-tag">AD DS</span><span class="proj-tag">DNS</span></div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-title">Microsoft 365 and Entra ID Admin</div>
+          <div class="proj-desc">Practised managing an M365 tenant including creating users, assigning licences, B2B guest access and dynamic groups in Entra ID.</div>
+          <div class="proj-tags"><span class="proj-tag">Microsoft 365</span><span class="proj-tag">Entra ID</span><span class="proj-tag">Azure AD</span><span class="proj-tag">Dynamic Groups</span></div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-title">Hyper-V VM Deployment</div>
+          <div class="proj-desc">Deployed Windows 10 and 11 virtual machines using Hyper-V, configured virtual switches and managed snapshots in a test environment.</div>
+          <div class="proj-tags"><span class="proj-tag">Hyper-V</span><span class="proj-tag">Windows 10</span><span class="proj-tag">Windows 11</span></div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-title">Custom Domain Setup in M365</div>
+          <div class="proj-desc">Verified a custom domain in Microsoft 365 by configuring DNS TXT records and setting up org-wide email routing settings.</div>
+          <div class="proj-tags"><span class="proj-tag">Microsoft 365</span><span class="proj-tag">DNS</span><span class="proj-tag">Domain Validation</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <h2 class="sec-heading">Get in Touch</h2>
+      <p>I am actively looking for Level 1 IT Support roles in Sydney. If you have an opening or just want to have a chat, feel free to reach out.</p>
+      <div class="contact-cards">
+        <a href="mailto:hudashykh1997@gmail.com" class="contact-card">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          hudashykh1997@gmail.com
+        </a>
+        <a href="tel:+61422259573" class="contact-card">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.07 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
+          +61 422 259 573
+        </a>
+        <a href="https://www.linkedin.com/in/huda-shaikh-1a154222b" target="_blank" class="contact-card">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn Profile
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Huda Shaikh &nbsp;|&nbsp; Level 1 IT Support &nbsp;|&nbsp; Sydney, AU</footer>
+
+<script>
+  function toggle(card) {
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.case-card').forEach(c => c.classList.remove('open'));
+    if (!isOpen) card.classList.add('open');
+  }
+  function filter(cat, btn) {
+    document.querySelectorAll('.ftag').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    document.querySelectorAll('.case-card').forEach(card => {
+      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>
